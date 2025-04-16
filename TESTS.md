@@ -5,17 +5,20 @@ This guide explains how to test MCP Alchemy with multiple databases using Docker
 ## Setup Test Databases
 
 1. Start the test databases using docker-compose:
+
 ```bash
 cd tests
 docker-compose up -d
 ```
 
 This will create:
+
 - MySQL database on port 3307
 - PostgreSQL database on port 5433
 - The Chinook sample database will be loaded into both
 
 2. Verify the databases are running:
+
 ```bash
 # Check MySQL
 mysql -h 127.0.0.1 -P 3307 -u chinook -pchinook Chinook -e "SELECT COUNT(*) FROM Album;"
@@ -27,11 +30,13 @@ PGPASSWORD=chinook psql -h localhost -p 5433 -U chinook chinook_db -c "SELECT CO
 ## Configure Claude Desktop
 
 The provided `tests/claude_desktop_config.json` contains configurations for:
+
 - SQLite Chinook database
 - MySQL Chinook database
 - PostgreSQL Chinook database
 
 Copy it to your Claude Desktop config location:
+
 ```bash
 cp tests/claude_desktop_config.json ~/.config/claude-desktop/config.json
 ```
@@ -58,6 +63,7 @@ Can you help me with this analysis?
 ```
 
 This will test:
+
 - Database connectivity to all three databases
 - Table listing functionality
 - Schema inspection
@@ -68,12 +74,14 @@ This will test:
 ## Expected Results
 
 The results should show:
+
 - 11 tables in each database
 - Identical schema definitions
 - Same query results across all databases
 - Proper handling of NULL values and formatting
 
 If any discrepancies are found, check:
+
 1. Docker container status
 2. Database connection strings
 3. Database initialization scripts
